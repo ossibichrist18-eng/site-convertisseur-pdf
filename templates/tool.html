@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ tool.title }} — Conversion Rapide{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('index') }}" style="color: var(--gold); text-decoration: none; font-size: 13px;">&larr; Retour à l'accueil</a>
+</div>
+
+<div class="tool-box">
+    <h2>{{ tool.title }}</h2>
+    <p class="desc">{{ tool.desc }}</p>
+
+    <form id="upload-form" action="{{ tool.endpoint }}" method="POST" enctype="multipart/form-data">
+        <div class="drop-zone" id="drop-zone">
+            <p>Glissez et déposez votre fichier ici ou cliquez pour parcourir</p>
+            <input type="file" name="file" id="file-input" class="file-input" accept="{{ tool.accept }}" {% if tool.multiple %}multiple{% endif %} required>
+            <div id="file-list" class="file-list"></div>
+        </div>
+
+        <button type="submit" class="btn" id="convert-btn" disabled>
+            <span>Lancer la conversion</span>
+        </button>
+    </form>
+
+    <div class="progress-container" id="progress-container">
+        <div class="progress-bar-wrapper">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">Préparation...</div>
+    </div>
+</div>
+{% endblock %}

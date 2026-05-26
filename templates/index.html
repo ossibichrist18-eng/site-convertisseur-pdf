@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Accueil — Convertisseur PDF Moderne{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>Tous les outils de conversion web dont vous avez besoin</h2>
+    <p>Traitement cloud gratuit, performant et sécurisé sans bases de données.</p>
+</div>
+
+<div class="grid" id="outils">
+    {% for id, details in tools.items() %}
+    <a href="{{ url_for('tool', name=id) }}" class="card">
+        <div class="card-header">
+            <span class="card-icon">⚡</span>
+            <h3 class="card-title">{{ details.title }}</h3>
+        </div>
+        <p class="card-desc">{{ details.desc }}</p>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

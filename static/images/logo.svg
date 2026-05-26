@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="220" height="44" viewBox="0 0 220 44">
+  <!-- Icône carrée -->
+  <rect x="0" y="2" width="40" height="40" rx="9" fill="#162316"/>
+  <rect x="0" y="2" width="40" height="40" rx="9" fill="none" stroke="#F5A500" stroke-width="1.5"/>
+
+  <!-- Document shape en blanc -->
+  <rect x="11" y="9" width="14" height="18" rx="2" fill="none" stroke="#ffffff" stroke-width="1.4"/>
+  <path d="M18 9v5h7" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linejoin="round"/>
+  <line x1="13" y1="18" x2="23" y2="18" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
+  <line x1="13" y1="21" x2="23" y2="21" stroke="#ffffff" stroke-width="1" stroke-linecap="round"/>
+
+  <!-- Flèche de conversion en gold -->
+  <path d="M26 24 L31 20 L31 23 L33 23 L33 25 L31 25 L31 28 Z" fill="#F5A500"/>
+
+  <!-- Texte CONVERTISSEUR -->
+  <text x="50" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#8aaa8a" letter-spacing="1.5">CONVERTISSEUR</text>
+
+  <!-- Texte PDF en gold -->
+  <text x="50" y="36" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="700" fill="#F5A500" letter-spacing="0.5">PDF</text>
+</svg>
