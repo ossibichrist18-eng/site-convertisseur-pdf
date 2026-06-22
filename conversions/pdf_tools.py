@@ -1,56 +1,103 @@
 import os
-from zipfile import ZipFile
-# from pypdf import PdfMerger, PdfReader, PdfWriter
-def merge_pdfs(pdf_paths, output_path):
-    """Fusionne plusieurs fichiers PDF dans l'ordre de la liste"""
-    merger = PdfMerger()
-    for pdf in pdf_paths:
-        merger.append(pdf)
-    merger.write(output_path)
-    merger.close()
+import io
+import zipfile
+import pikepdf
+from pypdf import PdfWriter, PdfReader
+from reportlab.pdfgen import canvas
 
-def split_pdf(pdf_path, output_dir):
-    """Sépare chaque page d'un PDF dans des fichiers individuels et crée un ZIP"""
-    reader = PdfReader(pdf_path)
-    zip_path = os.path.join(output_dir, "pages.zip")
-    
-    with ZipFile(zip_path, 'w') as zipf:
-        for idx, page in enumerate(reader.pages):
+def merge_pdfs(input_paths, output_path):
+    writer = PdfWriter()
+    for path in input_paths:
+        reader = PdfReader(path)
+        for page in reader.pages:
+            writer.add_page(page)
+    with open(output_path, 'wb') as f:
+        writer.write(f)
+
+def split_pdf(input_path, output_dir):
+    reader = PdfReader(input_path)
+    zip_path = os.path.join(output_dir, 'pages_extraites.zip')
+    with zipfile.ZipFile(zip_path, 'w') as zf:
+        for i, page in enumerate(reader.pages):
             writer = PdfWriter()
             writer.add_page(page)
-            
-            page_filename = f"page_{idx+1}.pdf"
-            page_path = os.path.join(output_dir, page_filename)
-            
-            with open(page_path, "wb") as f:
+            page_path = os.path.join(output_dir, f'page_{i + 1}.pdf')
+            with open(page_path, 'wb') as f:
                 writer.write(f)
-                
-            zipf.write(page_path, arcname=page_filename)
-            
+            zf.write(page_path, f'page_{i + 1}.pdf')
     return zip_path
 
-def convert_pdf_to_excel(pdf_path, excel_path):
-    """Extrait des tableaux de données structurées d'un PDF vers Excel via Camelot et OpenPyXL"""
+def convert_pdf_to_excel(input_path, output_path):
     import camelot
-    import openpyxl
-    
-    # Extraction en mode 'lattice' (tableaux délimités par des lignes)
-    tables = camelot.read_pdf(pdf_path, pages='all', flavor='lattice')
-    
+    import pandas as pd
+    tables = camelot.read_pdf(input_path, pages='all')
     if len(tables) == 0:
-        # Fallback en mode 'stream' (tableaux basés uniquement sur les espaces blancs)
-        tables = camelot.read_pdf(pdf_path, pages='all', flavor='stream')
-        
-    wb = openpyxl.Workbook()
-    # Supprimer la feuille par défaut
-    wb.remove(wb.active)
-    
-    if len(tables) == 0:
-        raise Exception("Aucune structure tabulaire n'a pu être extraite de ce document.")
-        
-    for idx, table in enumerate(tables):
-        ws = wb.create_sheet(title=f"Tableau {idx+1}")
-        for row in table.data:
-            ws.append(row)
-            
-    wb.save(excel_path)
+        raise ValueError("Aucun tableau détecté dans ce PDF")
+    with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
+        for i, table in enumerate(tables):
+            table.df.to_excel(writer, sheet_name=f'Tableau_{i + 1}', index=False)
+
+def compress_pdf(input_path, output_path):
+    reader = PdfReader(input_path)
+    writer = PdfWriter()
+    for page in reader.pages:
+        writer.add_page(page)
+    for page in writer.pages:
+        page.compress_content_streams()
+    with open(output_path, 'wb') as f:
+        writer.write(f)
+
+def remove_pdf_password(input_path, password, output_path):
+    with pikepdf.open(input_path, password=password) as pdf:
+        pdf.save(output_path)
+
+def add_page_numbers(input_path, output_path):
+    reader = PdfReader(input_path)
+    writer = PdfWriter()
+    for i, page in enumerate(reader.pages):
+        w = float(page.mediabox.width)
+        h = float(page.mediabox.height)
+        packet = io.BytesIO()
+        c = canvas.Canvas(packet, pagesize=(w, h))
+        c.setFont("Helvetica", 11)
+        c.setFillColorRGB(0.4, 0.4, 0.4)
+        c.drawCentredString(w / 2, 20, str(i + 1))
+        c.save()
+        packet.seek(0)
+        overlay = PdfReader(packet)
+        page.merge_page(overlay.pages[0])
+        writer.add_page(page)
+    with open(output_path, 'wb') as f:
+        writer.write(f)
+
+def add_watermark(input_path, output_path, text):
+    reader = PdfReader(input_path)
+    writer = PdfWriter()
+    for page in reader.pages:
+        w = float(page.mediabox.width)
+        h = float(page.mediabox.height)
+        packet = io.BytesIO()
+        c = canvas.Canvas(packet, pagesize=(w, h))
+        c.setFont("Helvetica", 40)
+        c.setFillColorRGB(0.7, 0.7, 0.7, alpha=0.4)
+        c.saveState()
+        c.translate(w / 2, h / 2)
+        c.rotate(45)
+        c.drawCentredString(0, 0, text)
+        c.restoreState()
+        c.save()
+        packet.seek(0)
+        overlay = PdfReader(packet)
+        page.merge_page(overlay.pages[0])
+        writer.add_page(page)
+    with open(output_path, 'wb') as f:
+        writer.write(f)
+
+def protect_pdf(input_path, output_path, password):
+    reader = PdfReader(input_path)
+    writer = PdfWriter()
+    for page in reader.pages:
+        writer.add_page(page)
+    writer.encrypt(password)
+    with open(output_path, 'wb') as f:
+        writer.write(f)

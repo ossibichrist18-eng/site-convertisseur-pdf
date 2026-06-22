@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Comparer des PDF Côte à Côte — Conversion Rapide{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 1.5rem;">
+    <a href="{{ url_for('index') }}" style="color: var(--gold); text-decoration: none; font-size: 13px;">&larr; Retour à l'accueil</a>
+</div>
+
+<div class="tool-box" style="max-width: 100%; width: 95%;">
+    <h2>{{ tool.title }}</h2>
+    <p class="desc">{{ tool.desc }}</p>
+
+    <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 250px; background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left;">
+            <label style="color: var(--gold); display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 14px;">Fichier PDF A :</label>
+            <input type="file" id="pdf-file-a" accept=".pdf" style="width: 100%; color: white;">
+        </div>
+        <div style="flex: 1; min-width: 250px; background: rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.1); text-align: left;">
+            <label style="color: var(--gold); display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 14px;">Fichier PDF B :</label>
+            <input type="file" id="pdf-file-b" accept=".pdf" style="width: 100%; color: white;">
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; height: 75vh; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; background: rgba(0,0,0,0.2); padding: 0.5rem; box-sizing: border-box;">
+        <div style="flex: 1; height: 100%;">
+            <iframe id="viewer-a" style="width: 100%; height: 100%; border: none; background: #333; border-radius: 4px;" src=""></iframe>
+        </div>
+        <div style="flex: 1; height: 100%;">
+            <iframe id="viewer-b" style="width: 100%; height: 100%; border: none; background: #333; border-radius: 4px;" src=""></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const fileA = document.getElementById('pdf-file-a');
+    const fileB = document.getElementById('pdf-file-b');
+    const viewerA = document.getElementById('viewer-a');
+    const viewerB = document.getElementById('viewer-b');
+
+    fileA.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const fileURL = URL.createObjectURL(file);
+            viewerA.src = fileURL;
+        }
+    });
+
+    fileB.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const fileURL = URL.createObjectURL(file);
+            viewerB.src = fileURL;
+        }
+    });
+});
+</script>
+{% endblock %}

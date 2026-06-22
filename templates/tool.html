@@ -18,7 +18,59 @@
             <div id="file-list" class="file-list"></div>
         </div>
 
-        <button type="submit" class="btn" id="convert-btn" disabled>
+        <!-- Option Mot de passe (Protect & Unprotect PDF) -->
+        {% if tool.password %}
+        <div class="form-group" style="margin-top: 1.5rem; text-align: left;">
+            <label for="password" style="display: block; color: var(--gold); margin-bottom: 0.5rem; font-size: 14px;">Mot de passe :</label>
+            <input type="password" name="password" id="password" required 
+                   style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;" 
+                   placeholder="Entrez le mot de passe...">
+        </div>
+        {% endif %}
+
+        <!-- Option Filigrane (Watermark PDF) -->
+        {% if tool.watermark %}
+        <div class="form-group" style="margin-top: 1.5rem; text-align: left;">
+            <label for="watermark" style="display: block; color: var(--gold); margin-bottom: 0.5rem; font-size: 14px;">Texte du filigrane :</label>
+            <input type="text" name="watermark" id="watermark" required 
+                   style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;" 
+                   placeholder="Ex: CONFIDENTIEL">
+        </div>
+        {% endif %}
+
+        <!-- Option Redimensionnement d'Image (Resize Image) -->
+        {% if tool.resize %}
+        <div class="form-group-row" style="margin-top: 1.5rem; display: flex; gap: 1rem; text-align: left;">
+            <div style="flex: 1;">
+                <label for="width" style="display: block; color: var(--gold); margin-bottom: 0.5rem; font-size: 14px;">Largeur (px) :</label>
+                <input type="number" name="width" id="width" value="800" required 
+                       style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;">
+            </div>
+            <div style="flex: 1;">
+                <label for="height" style="display: block; color: var(--gold); margin-bottom: 0.5rem; font-size: 14px;">Hauteur (px) :</label>
+                <input type="number" name="height" id="height" value="600" required 
+                       style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;">
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Option Découpage Vidéo (Trim Video) -->
+        {% if tool.trim %}
+        <div class="form-group-row" style="margin-top: 1.5rem; display: flex; gap: 1rem; text-align: left;">
+            <div style="flex: 1;">
+                <label for="start" style="display: block; color: var(--gold); margin-bottom: 0.5rem; font-size: 14px;">Début (secondes) :</label>
+                <input type="number" name="start" id="start" value="0" min="0" required 
+                       style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;">
+            </div>
+            <div style="flex: 1;">
+                <label for="end" style="display: block; color: var(--gold); margin-bottom: 0.5rem; font-size: 14px;">Fin (secondes) :</label>
+                <input type="number" name="end" id="end" value="30" min="1" required 
+                       style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(0, 0, 0, 0.3); color: white; box-sizing: border-box;">
+            </div>
+        </div>
+        {% endif %}
+
+        <button type="submit" class="btn" id="convert-btn" style="margin-top: 1.5rem;" disabled>
             <span>Lancer la conversion</span>
         </button>
     </form>

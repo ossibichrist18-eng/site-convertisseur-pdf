@@ -1,31 +1,56 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <meta name="google-site-verification" content="-XEHZKgk1w1fOxoLSRdeIokKVrSG4yAH7_Ltnb8Gikw" />
     <meta charset="UTF-8">
+    <meta name="description" content="{% block description %}Convertisseur PDF en ligne gratuit et rapide. Fusionnez, divisez, convertissez vos fichiers PDF, Word et Images sans stockage permanent.{% endblock %}">
+
+    <meta property="og:title" content="Convertisseur PDF Privé - Outil Cloud Ultra-rapide">
+    <meta property="og:description" content="Convertissez vos documents en ligne en toute sécurité.">
+    <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Convertisseur PDF Gratuit{% endblock %}</title>
     
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="alternate icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
-    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        @media (max-width: 600px) {
+            #live-clock {
+                display: none !important;
+            }
+        }
+    </style>
 </head>
 <body>
 
+    <!-- Bandeau de conversion global en haut de l'écran -->
+    <div id="global-conversion-banner" style="display: none; position: fixed; top: 0; left: 0; width: 100%; background: #153e25; color: #ffeb9c; text-align: center; padding: 12px; font-weight: bold; z-index: 9999; box-shadow: 0 4px 10px rgba(0,0,0,0.5); align-items: center; justify-content: center; gap: 12px; border-bottom: 2px solid var(--gold); box-sizing: border-box;">
+        <span style="border: 3px solid #ffeb9c; border-top: 3px solid transparent; border-radius: 50%; width: 16px; height: 16px; display: inline-block; animation: spin 1s linear infinite; box-sizing: border-box;"></span>
+        <span style="font-size: 14px; letter-spacing: 0.5px;">Traitement en cours... Veuillez patienter, tout s'effectue en arrière-plan de manière sécurisée.</span>
+    </div>
+
     <header>
         <div class="nav-container">
-            <div class="logo-area">
-                <picture>
-                    <source srcset="{{ url_for('static', filename='images/logo.svg') }}" type="image/svg+xml">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Convertisseur PDF" class="site-logo">
-                </picture>
-                <div class="logo-text">
-                    <h1>Convertisseur PDF</h1>
-                    <p>Architecture Cloud ultra-rapide</p>
+            <a href="{{ url_for('index') }}" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                <div class="logo-area">
+                    <picture>
+                        <source srcset="{{ url_for('static', filename='images/logo.svg') }}" type="image/svg+xml">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Convertisseur PDF" class="site-logo">
+                    </picture>
+                    <div class="logo-text">
+                        <h1>Convertisseur PDF</h1>
+                        <p>Architecture Cloud ultra-rapide</p>
+                    </div>
                 </div>
-            </div>
-            <nav>
+            </a>
+            
+            <nav style="display: flex; align-items: center; gap: 1.5rem;">
+                <div id="live-clock" style="color: #ccc; font-size: 12px; font-family: monospace; background: rgba(255, 255, 255, 0.05); padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); white-space: nowrap;">
+                    Chargement...
+                </div>
                 <a href="{{ url_for('index') }}">Accueil</a>
             </nav>
         </div>
@@ -38,6 +63,25 @@
     <footer>
         <p>&copy; 2026 Convertisseur PDF Privé. Aucun fichier stocké de manière permanente sur nos serveurs.</p>
     </footer>
+
+    <script>
+        function updateClock() {
+            const clockEl = document.getElementById('live-clock');
+            if (!clockEl) return;
+            
+            const now = new Date();
+            
+            const dateOptions = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+            const dateStr = now.toLocaleDateString('fr-FR', dateOptions);
+            const formattedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+            
+            const timeStr = now.toLocaleTimeString('fr-FR', { hour12: false });
+            
+            clockEl.innerText = `${formattedDate} — ${timeStr}`;
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
+    </script>
 
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

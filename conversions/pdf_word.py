@@ -1,7 +1,8 @@
+import os
 from pdf2docx import Converter
 
-def convert_pdf_to_word(pdf_path, word_path):
-    """Convertit un PDF en Word (.docx)"""
+def convert_pdf_to_word(pdf_path, docx_path):
+    """Convertit un fichier PDF en document Word (.docx) modifiable."""
     cv = Converter(pdf_path)
-    cv.convert(word_path, start=0, end=None)
+    cv.convert(docx_path, start=0, end=None)
     cv.close()
