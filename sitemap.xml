@@ -2,8 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://convertisseurpdf.qzz.io/</loc>
-    <lastmod>2025-06-28</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/pdf-to-word</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/word-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/pdf-to-jpg</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/image-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/excel-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/pdf-to-excel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/ppt-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/merge-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/split-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/compress-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/remove-password</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/add-page-numbers</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/watermark-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/protect-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/txt-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/html-to-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/pdf-to-ppt</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/compare-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/pdf-to-audio</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/ocr-doc</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/anonymize-pdf</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/extract-images</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/jpg-to-png</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/png-to-jpg</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/resize-image</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/to-webp</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/compress-image</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/black-and-white</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/word-to-ppt</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/ppt-to-word</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/mp3-to-wav</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/wav-to-mp3</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/compress-video</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/video-to-mp3</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/video-to-gif</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://convertisseurpdf.qzz.io/outil/trim-video</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
 </urlset>
