@@ -29,6 +29,10 @@ def google_verify():
 def sitemap():
     return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'sitemap.xml', mimetype='application/xml')
 
+@app.route('/googlec29be3f3b9d13ec3.html')
+def google_verify2():
+    return 'google-site-verification: googlec29be3f3b9d13ec3', 200, {'Content-Type': 'text/html'}
+
 @app.route('/robots.txt')
 def robots():
     content = "User-agent: *\nAllow: /\nSitemap: https://convertisseurpdf.vidsave.tech/sitemap.xml"
