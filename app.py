@@ -27,14 +27,13 @@ def sitemap():
 
 @app.route('/robots.txt')
 def robots():
-    content = "User-agent: *\nAllow: /\nSitemap: https://convertisseurpdf.vidsave.tech/sitemap.xml"
+    content = "User-agent: *\nAllow: /\nSitemap: https://convertisseurpdf.qzz.io/sitemap.xml"
     return content, 200, {'Content-Type': 'text/plain'}
 
 # Route pour la vérification Google Search Console
 @app.route('/googlec29be3f3b9d13ec3.html')
 def google_verification():
-    from flask import send_from_directory
-    return send_from_directory('.', 'googlec29be3f3b9d13ec3.html')
+    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'googlec29be3f3b9d13ec3.html')
 
 TOOLS = {
     # PDF
