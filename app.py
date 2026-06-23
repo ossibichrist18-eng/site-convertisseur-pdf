@@ -25,13 +25,13 @@ app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
 def google_verify():
     return '<html><head><meta name="google-site-verification" content="-XEHZKgk1w1fOxoLSRdeIokKVrSG4yAH7_Ltnb8Gikw"/></head><body>google-site-verification: -XEHZKgk1w1fOxoLSRdeIokKVrSG4yAH7_Ltnb8Gikw</body></html>', 200
 
-@app.route('/sitemap.xml')
-def sitemap():
-    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'sitemap.xml', mimetype='application/xml')
-
 @app.route('/googlec29be3f3b9d13ec3.html')
 def google_verify2():
     return 'google-site-verification: googlec29be3f3b9d13ec3', 200, {'Content-Type': 'text/html'}
+    
+@app.route('/sitemap.xml')
+def sitemap():
+    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'sitemap.xml', mimetype='application/xml')
 
 @app.route('/robots.txt')
 def robots():
