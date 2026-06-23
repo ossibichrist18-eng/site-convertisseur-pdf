@@ -20,14 +20,6 @@ from conversions.advanced_tools import convert_pdf_to_audio, ocr_file_to_txt, an
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
-
-@app.route('/google-site-verification.html')
-def google_verify():
-    return '<html><head><meta name="google-site-verification" content="-XEHZKgk1w1fOxoLSRdeIokKVrSG4yAH7_Ltnb8Gikw"/></head><body>google-site-verification: -XEHZKgk1w1fOxoLSRdeIokKVrSG4yAH7_Ltnb8Gikw</body></html>', 200
-
-@app.route('/googlec29be3f3b9d13ec3.html')
-def google_verify2():
-    return 'google-site-verification: googlec29be3f3b9d13ec3', 200, {'Content-Type': 'text/html'}
     
 @app.route('/sitemap.xml')
 def sitemap():
