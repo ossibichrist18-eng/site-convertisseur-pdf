@@ -30,6 +30,12 @@ def robots():
     content = "User-agent: *\nAllow: /\nSitemap: https://convertisseurpdf.vidsave.tech/sitemap.xml"
     return content, 200, {'Content-Type': 'text/plain'}
 
+# Route pour la vérification Google Search Console
+@app.route('/googlec29be3f3b9d13ec3.html')
+def google_verification():
+    from flask import send_from_directory
+    return send_from_directory('.', 'googlec29be3f3b9d13ec3.html')
+
 TOOLS = {
     # PDF
     'pdf-to-word':     {'title': 'PDF en Word',         'desc': 'Convertissez vos fichiers PDF en documents Word (.docx) modifiables.',     'endpoint': '/convert/pdf-to-word',     'accept': '.pdf'},
