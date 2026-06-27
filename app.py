@@ -1,7 +1,7 @@
 import os
 import shutil
 import uuid
-from flask import Flask, render_template, request, send_file, abort, send_from_directory
+from flask import Flask, render_template, request, send_file, abort, send_from_directory, redirect, url_for
 from werkzeug.utils import secure_filename
 
 # Imports d'origine
@@ -20,14 +20,14 @@ from conversions.advanced_tools import convert_pdf_to_audio, ocr_file_to_txt, an
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
-    
+
 @app.route('/sitemap.xml')
 def sitemap():
     return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'sitemap.xml', mimetype='application/xml')
 
 @app.route('/robots.txt')
 def robots():
-    content = "User-agent: *\nAllow: /\nSitemap: https://convertisseurpdf.qzz.io/sitemap.xml"
+    content = "User-agent: *\nAllow: /\nSitemap: https://vidsave.tech/sitemap.xml"
     return content, 200, {'Content-Type': 'text/plain'}
 
 # Route pour la vérification Google Search Console
@@ -53,11 +53,11 @@ TOOLS = {
     'protect-pdf':     {'title': 'Protéger PDF',         'desc': 'Protégez votre PDF avec un mot de passe.',                                 'endpoint': '/convert/protect-pdf',     'accept': '.pdf', 'password': True},
     'txt-to-pdf':      {'title': 'TXT en PDF',           'desc': 'Convertissez vos fichiers texte (.txt) en documents PDF.',                 'endpoint': '/convert/txt-to-pdf',      'accept': '.txt'},
     'html-to-pdf':     {'title': 'HTML en PDF',          'desc': 'Convertissez vos pages HTML en documents PDF.',                            'endpoint': '/convert/html-to-pdf',     'accept': '.html,.htm'},
-    
+
     # Nouveaux outils PDF et Comparateur
     'pdf-to-ppt':      {'title': 'PDF en PowerPoint',    'desc': 'Convertissez vos fichiers PDF en présentations PowerPoint (.pptx).',        'endpoint': '/convert/pdf-to-ppt',      'accept': '.pdf'},
     'compare-pdf':     {'title': 'Comparer PDF',         'desc': 'Affichez et comparez deux fichiers PDF locaux côte à côte de manière privée.', 'endpoint': '#', 'accept': '.pdf'},
-    
+
     # Outils avancés (Audio / OCR / Securité)
     'pdf-to-audio':    {'title': 'PDF en Livre Audio',   'desc': 'Convertissez le texte de votre PDF en un fichier audio MP3 agréable à écouter.', 'endpoint': '/convert/pdf-to-audio',    'accept': '.pdf'},
     'ocr-doc':         {'title': 'OCR - Image/PDF en Texte', 'desc': 'Extrayez et copiez le texte présent sur un PDF scanné ou une simple photo.', 'endpoint': '/convert/ocr-doc',         'accept': '.pdf,.png,.jpg,.jpeg'},
@@ -71,7 +71,7 @@ TOOLS = {
     'to-webp':         {'title': 'Image en WebP',        'desc': 'Convertissez vos images JPG/PNG en format WebP léger.',                   'endpoint': '/convert/to-webp',         'accept': '.jpg,.jpeg,.png', 'multiple': True},
     'compress-image':  {'title': 'Compresser Image',     'desc': 'Réduisez le poids de vos images sans perte de qualité visible.',           'endpoint': '/convert/compress-image',  'accept': '.jpg,.jpeg,.png', 'multiple': True},
     'black-and-white': {'title': 'Image Noir & Blanc',   'desc': 'Convertissez vos images en noir et blanc instantanément.',                 'endpoint': '/convert/black-and-white', 'accept': '.jpg,.jpeg,.png', 'multiple': True},
-    
+
     # PowerPoint / Word
     'word-to-ppt':     {'title': 'Word en PowerPoint',    'desc': 'Convertissez vos documents Word (.docx) en présentations PowerPoint (.pptx).', 'endpoint': '/convert/word-to-ppt',     'accept': '.docx'},
     'ppt-to-word':     {'title': 'PowerPoint en Word',    'desc': 'Convertissez vos présentations (.pptx) en documents Word (.docx).',          'endpoint': '/convert/ppt-to-word',     'accept': '.pptx'},
@@ -79,7 +79,7 @@ TOOLS = {
     # Audio
     'mp3-to-wav':      {'title': 'MP3 en WAV',           'desc': 'Convertissez vos fichiers MP3 en format WAV haute qualité.',               'endpoint': '/convert/mp3-to-wav',      'accept': '.mp3'},
     'wav-to-mp3':      {'title': 'WAV en MP3',           'desc': 'Convertissez vos fichiers WAV en MP3 compressé.',                          'endpoint': '/convert/wav-to-mp3',      'accept': '.wav'},
-    
+
     # Vidéo
     'compress-video':  {'title': 'Compresser Vidéo',     'desc': 'Réduisez la taille de vos vidéos MP4 sans perte de qualité visible.',      'endpoint': '/convert/compress-video',  'accept': '.mp4,.mov,.avi,.mkv'},
     'video-to-mp3':    {'title': 'Vidéo en MP3',         'desc': 'Extrayez la piste audio de vos vidéos en fichier MP3.',                    'endpoint': '/convert/video-to-mp3',    'accept': '.mp4,.mov,.avi,.mkv,.webm'},
@@ -96,20 +96,19 @@ def create_temp_dir():
 def index():
     return render_template('index.html', tools=TOOLS)
 
-import os
-
-@app.route('/outil/<name>')
+# CORRECTION : accepte avec ET sans slash final, gère les erreurs 404 proprement
+@app.route('/outil/<name>/', strict_slashes=False)
 def tool(name):
     if name not in TOOLS:
         abort(404)
     if name == 'compare-pdf':
         return render_template('compare.html', tool_id=name, tool=TOOLS[name])
-    
+
     # Vérifie si une page SEO statique existe
     page_path = os.path.join(app.root_path, 'templates', 'pages', f'{name}.html')
     if os.path.exists(page_path):
         return render_template(f'pages/{name}.html', tool_id=name, tool=TOOLS[name])
-    
+
     # Sinon, utilise le template dynamique par défaut
     return render_template('tool.html', tool_id=name, tool=TOOLS[name])
 
