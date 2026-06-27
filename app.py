@@ -96,12 +96,21 @@ def create_temp_dir():
 def index():
     return render_template('index.html', tools=TOOLS)
 
+import os
+
 @app.route('/outil/<name>')
 def tool(name):
     if name not in TOOLS:
         abort(404)
     if name == 'compare-pdf':
         return render_template('compare.html', tool_id=name, tool=TOOLS[name])
+    
+    # Vérifie si une page SEO statique existe
+    page_path = os.path.join(app.root_path, 'templates', 'pages', f'{name}.html')
+    if os.path.exists(page_path):
+        return render_template(f'pages/{name}.html', tool_id=name, tool=TOOLS[name])
+    
+    # Sinon, utilise le template dynamique par défaut
     return render_template('tool.html', tool_id=name, tool=TOOLS[name])
 
 # API d'origine
