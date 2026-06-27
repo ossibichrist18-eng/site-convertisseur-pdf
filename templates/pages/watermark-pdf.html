@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajouter un Filigrane PDF Gratuit | Watermark Texte</title>
+  <meta name="description" content="Protégez vos documents PDF avec un filigrane texte personnalisé sur chaque page. Gratuit, sans inscription, sans filigrane publicitaire.">
+  <link rel="canonical" href="https://site-convertisseur-pdf.onrender.com/outil/watermark-pdf/">
+  
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #0f1f0f;
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 32px;
+    background: rgba(0,0,0,0.25);
+    border-bottom: 1px solid #1a3a1a;
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: #1a3a1a;
+    border: 1px solid #2d5a2d;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: #f5a623; font-size: 20px;
+  }
+  .logo-text { display: flex; flex-direction: column; }
+  .logo-text small { font-size: 0.65rem; color: #f5a623; letter-spacing: 1px; text-transform: uppercase; }
+  .logo-text strong { font-size: 1.1rem; color: #fff; font-weight: 600; }
+  .logo-text span { font-size: 0.75rem; color: #7a9e7e; }
+  .header-right {
+    display: flex; align-items: center; gap: 20px;
+    font-size: 0.85rem;
+  }
+  .header-right .date {
+    background: #1a3a1a;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #2d5a2d;
+    color: #7a9e7e;
+  }
+  .header-right a {
+    color: #7a9e7e;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .header-right a:hover { color: #f5a623; }
+  main {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: #f5a623;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .back-link:hover { text-decoration: underline; }
+  .tool-card {
+    background: rgba(20, 40, 20, 0.6);
+    border: 1px solid #2d5a2d;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .tool-card h1 {
+    color: #f5a623;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+  }
+  .tool-card .subtitle {
+    color: #7a9e7e;
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+  }
+  .dropzone {
+    border: 2px dashed #4a7a4a;
+    border-radius: 12px;
+    padding: 50px 20px;
+    background: rgba(15, 31, 15, 0.4);
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 25px;
+    position: relative;
+  }
+  .dropzone:hover {
+    border-color: #7a9e7e;
+    background: rgba(15, 31, 15, 0.6);
+  }
+  .dropzone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .dropzone-text {
+    color: #7a9e7e;
+    font-size: 0.95rem;
+    pointer-events: none;
+  }
+  .extra-fields {
+    margin: 20px 0;
+    text-align: left;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .extra-fields label {
+    display: block;
+    color: #7a9e7e;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    text-align: left;
+  }
+  .extra-fields input[type="text"],
+  .extra-fields input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #2d5a2d;
+    background: #0f1f0f;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+  }
+  .extra-fields input:focus {
+    outline: none;
+    border-color: #f5a623;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    background: #7a9e7e;
+    color: #0f1f0f;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn:hover { background: #8ab08e; transform: translateY(-1px); }
+  .seo-text {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 12px;
+    border: 1px solid #1a3a1a;
+    text-align: left;
+    line-height: 1.7;
+  }
+  .seo-text h2 {
+    color: #f5a623;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+  .seo-text h3 {
+    color: #7a9e7e;
+    font-size: 1rem;
+    margin: 18px 0 8px;
+  }
+  .seo-text p {
+    color: #a0b8a0;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  .seo-text ul {
+    margin-left: 20px;
+    color: #a0b8a0;
+    font-size: 0.9rem;
+  }
+  .seo-text li { margin-bottom: 6px; }
+  footer {
+    text-align: center;
+    padding: 20px;
+    color: #5a7a5a;
+    font-size: 0.8rem;
+    border-top: 1px solid #1a3a1a;
+  }
+  @media (max-width: 600px) {
+    header { padding: 12px 16px; flex-direction: column; gap: 10px; }
+    .tool-card { padding: 24px; }
+    .tool-card h1 { font-size: 1.4rem; }
+  }
+</style>
+
+</head>
+<body>
+  
+<header>
+  <div class="header-left">
+    <div class="logo-icon">📄</div>
+    <div class="logo-text">
+      <small>Convertisseur</small>
+      <strong>Convertisseur PDF</strong>
+      <span>Architecture Cloud ultra-rapide</span>
+    </div>
+  </div>
+  <div class="header-right">
+    <span class="date">Samedi 27 juin 2026 — 09:33:53</span>
+    <a href="/">Accueil</a>
+  </div>
+</header>
+
+  <main>
+    <a href="/" class="back-link">← Retour à l'accueil</a>
+    <div class="tool-card">
+      <h1>Filigrane PDF</h1>
+      <p class="subtitle">Ajoutez un texte en filigrane sur toutes les pages de votre PDF.</p>
+      <form action="/convert/watermark-pdf" method="POST" enctype="multipart/form-data">
+        <div class="dropzone">
+          <input type="file" name="file" accept=".pdf" >
+          <div class="dropzone-text">Glissez et déposez votre fichier ici ou cliquez pour parcourir</div>
+        </div>
+        
+        <div class="extra-fields">
+          <label for="watermark">Texte du filigrane</label>
+          <input type="text" id="watermark" name="watermark" value="CONFIDENTIEL" placeholder="Ex: CONFIDENTIEL, Brouillon...">
+        </div>
+        
+        <button type="submit" class="btn">Lancer la conversion</button>
+      </form>
+    </div>
+    <article class="seo-text">
+      <h2>Protéger un PDF avec un filigrane personnalisé</h2>
+      
+      <p>Vous devez partager un document sensible en interne et vous voulez éviter qu'il soit diffusé à l'extérieur ? Un filigrane est la solution la plus simple. Notre outil ajoute un texte semi-transparent sur chaque page de votre PDF, visible mais non intrusif.</p>
+      <h3>Personnalisation</h3>
+      <p>Vous choisissez le texte : "CONFIDENTIEL", "BROUILLON", "COPYRIGHT", ou même le nom du destinataire. Le filigrane est appliqué en diagonal sur chaque page, avec une opacité réduite pour ne pas gêner la lecture.</p>
+      <h3>Utilisations professionnelles</h3>
+      <ul>
+        <li>Marquer des documents en cours de révision</li>
+        <li>Identifier la source d'une fuite en mettant le nom du destinataire</li>
+        <li>Protéger des créations graphiques avant validation</li>
+        <li>Indiquer le statut juridique d'un document</li>
+      </ul>
+      <p>Aucun filigrane publicitaire de notre part. Seul le vôtre apparaît.</p>
+
+    </article>
+  </main>
+  
+<footer>
+  © 2026 Convertisseur PDF Privé. Aucun fichier stocké de manière permanente sur nos serveurs.
+</footer>
+
+</body>
+</html>
